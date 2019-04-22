@@ -8,7 +8,7 @@ from keras.layers import Input, Embedding, Flatten, Dot, Dense, Concatenate
 from keras.models import Model, load_model
 
 def main():
-	dataset = pd.read_csv('../data/book_rating_data/ratings.csv')
+	dataset = pd.read_csv('../../data/book_rating_data/ratings.csv')
 	#print dataset.head()
 	#print dataset.shape
 	
@@ -18,6 +18,7 @@ def main():
 	print 'First five book ids: '
 	print (book_data[:5]) # first five books id
 
+	# The concept here is that, we have 10 books, therefore we are considering 10 users with id 1. Therefore, 10 users (actually all same) will give the rate for 10 different books 
 	user = np.array([1 for i in range(len(book_data))]) # creating matrix for first user
 
 	model = load_model('book_recommendation_trained_model_NN.h5')
@@ -34,7 +35,7 @@ def main():
 	print 'Predicted rating of these five books: '
 	print predictions[recommended_book_ids]
 
-	books = pd.read_csv('../data/book_rating_data/books.csv')
+	books = pd.read_csv('../../data/book_rating_data/books.csv')
 	print books.head()
 
 	print books[books['id'].isin(recommended_book_ids)]
